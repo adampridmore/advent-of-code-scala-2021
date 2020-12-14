@@ -1,7 +1,7 @@
 package adventofcode.day1
 
 object Day1 extends App {
-  def solve(lines: Seq[String]) : Int = {
+  def solve1(lines: Seq[String]) : Int = {
   val expenses = lines.map(line => line.trim.toInt)
 
     val m = getMatch(expenses.head, expenses.tail)
@@ -9,7 +9,7 @@ object Day1 extends App {
     m._1 * m._2
   }
 
-  def solve(lines: String) : Int =  solve(lines.split(System.lineSeparator()))
+  def solve1(lines: String) : Int =  solve1(lines.split(System.lineSeparator()))
 
   def getMatch(expense: Int, rest: Seq[Int]) : (Int, Int) = {
     rest

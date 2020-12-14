@@ -19,13 +19,13 @@ class Day1Spec extends AnyWordSpec with Matchers {
   675
   1456"""
 
-      Day1.solve(expenseLines) shouldBe 514579
+      Day1.solve1(expenseLines) shouldBe 514579
     }
   }
 
   "real file" in {
     val filename = "day1/expenses.txt"
     val lines = Source.fromResource(filename).getLines.toSeq
-    println("Day 1 : " + Day1.solve(lines))
+    println("Day 1 : " + Day1.solve1(lines))
   }
 }
