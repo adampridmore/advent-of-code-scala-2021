@@ -29,14 +29,10 @@ object Day1 extends App {
       expenses match {
         case Nil => None
         case one::two::Nil => None
-        case one::tail if (targetExpense - one > 0)=> {
-          val x = getMatch(tail, targetExpense - one)
+        case one::tail if (targetExpense - one > 0) => {
+          getMatch(tail, targetExpense - one)
             .map({case (b,c) => (one, b,c)})
-
-          x match {
-            case Some(x) => Some(x)
-            case None => fn(expenses.tail)
-          }
+            .fold(fn(expenses.tail))(Some(_))
         }
       }
     }

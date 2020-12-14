@@ -66,5 +66,28 @@ class Day1Spec extends AnyWordSpec with Matchers {
       val lines = Source.fromResource(filename).getLines.map(_.toInt).toList
       println("Day 1 - Part II : " + Day1.solve2(lines))
     }
+
+    "stuff" in {
+      def tryParse(s: String) : Option[Int] = {
+        val maybeInt = s.toIntOption
+
+        def tryParseRomanNumeral(s: String) : Option[Int] = {
+          s match {
+            case "X" => Some(10) // Possibly doesn't convert all numerals...
+            case _ => None
+          }
+        }
+
+        maybeInt match {
+          case Some(i) => Some(i)
+          case None => tryParseRomanNumeral(s)
+        }
+
+        maybeInt.fold(tryParseRomanNumeral(s))(Some(_))
+      }
+
+      tryParse("1") shouldBe Some(1)
+      tryParse("X") shouldBe Some(10)
+    }
   }
 }
