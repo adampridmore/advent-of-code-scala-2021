@@ -26,8 +26,7 @@ class Day1Spec extends AnyWordSpec with Matchers {
     }
   }
   
-  "day 1" should {
-
+  "day 1 part I" should {
     "expenses example" should {
       "be 514579" in {
         val expenseLines = """1721
@@ -41,10 +40,10 @@ class Day1Spec extends AnyWordSpec with Matchers {
       }
     }
 
-    "real file" ignore {
+    "real file" in {
       val filename = "day1/expenses.txt"
       val lines = Source.fromResource(filename).getLines.map(_.toInt).toList
-      println("Day 1 : " + Day1.solve(lines))
+      println("Day 1 : Part I : " + Day1.solve(lines))
     }
   }
 
@@ -58,8 +57,14 @@ class Day1Spec extends AnyWordSpec with Matchers {
     675
     1456"""
 
-        Day1.solveText2(expenseLines) shouldBe 437931
+        Day1.solveText2(expenseLines) shouldBe 241861950
       }
+    }
+
+    "real file" in {
+      val filename = "day1/expenses.txt"
+      val lines = Source.fromResource(filename).getLines.map(_.toInt).toList
+      println("Day 1 - Part II : " + Day1.solve2(lines))
     }
   }
 }

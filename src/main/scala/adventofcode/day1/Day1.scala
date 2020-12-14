@@ -21,25 +21,43 @@ object Day1 extends App {
   }
   
   def solve2(expenses: List[Int]) : Int = {
+    
     val targetExpense = 2020
 
-    getMatch(expenses, targetExpense)
-      .map(m => m._1 * m._2)
+    def fn(expenses: List[Int]) : Option[(Int, Int, Int)] = {
+
+      expenses match {
+        case Nil => None
+        case one::two::Nil => None
+        case one::tail if (targetExpense - one > 0)=> {
+          val x = getMatch(tail, targetExpense - one)
+            .map({case (b,c) => (one, b,c)})
+
+          x match {
+            case Some(x) => Some(x)
+            case None => fn(expenses.tail)
+          }
+        }
+      }
+    }
+
+    fn(expenses)
+      .map(r => (r._1 * r._2 * r._3) )
       .get
   }
 
   def getMatch(expenses: List[Int], target: Int) : Option[(Int, Int)] = {
-
-    println(s"e: ${expenses.mkString(",")} target: $target")
-
-    expenses match {
-      case head::Nil => None
-      case head::tail => {
+    
+    def tryMatchPair(head: Int, tail : List[Int]) : Option[(Int, Int)] = {
         tail
           .find(row => head + row == target)
           .fold(getMatch(tail,target))(result => Some(head, result) )
-      }
+    }
+
+    expenses match {
       case Nil => None
+      case head::Nil => None
+      case head::tail => tryMatchPair(head, tail)
     }
   }
 }
