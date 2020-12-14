@@ -1,19 +1,33 @@
 package adventofcode.day1
 
 object Day1 extends App {
-  def solve1(lines: Seq[String]) : Int = {
-  val expenses = lines.map(line => line.trim.toInt)
+  def solve1(expenses: List[Int]) : Int = {
+    val targetExpense = 2020
 
-    val m = getMatch(expenses.head, expenses.tail)
-
-    m._1 * m._2
+    getMatch(expenses, targetExpense)
+      .map(m => m._1 * m._2)
+      .get
   }
 
-  def solve1(lines: String) : Int =  solve1(lines.split(System.lineSeparator()))
+  def solve1(lines: String) : Int = {
+    solve1(lines
+      .split(System.lineSeparator())
+      .map(line => line.trim.toInt)
+      .toList)
+  }
 
-  def getMatch(expense: Int, rest: Seq[Int]) : (Int, Int) = {
-    rest
-      .find(e => expense + e == 2020)
-      .fold(getMatch(rest.head, rest.tail))( result => (expense, result) )
+  def getMatch(expenses: List[Int], target: Int) : Option[(Int, Int)] = {
+
+    println(s"e: ${expenses.mkString(",")} target: $target")
+
+    expenses match {
+      case head::Nil => None
+      case head::tail => {
+        tail
+          .find(row => head + row == target)
+          .fold(getMatch(tail,target))(result => Some(head, result) )
+      }
+      case Nil => None
+    }
   }
 }
