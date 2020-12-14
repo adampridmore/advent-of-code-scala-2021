@@ -12,15 +12,14 @@ object Day1 extends App {
       .toList
   }
 
-  def solve(expenses: List[Int]) : Int = {
+  def solve(expenses: List[Int]) : Option[Int] = {
     val targetExpense = 2020
 
     getMatch(expenses, targetExpense)
       .map(m => m._1 * m._2)
-      .get
   }
   
-  def solve2(expenses: List[Int]) : Int = {
+  def solve2(expenses: List[Int]) : Option[Int] = {
     
     val targetExpense = 2020
 
@@ -32,14 +31,13 @@ object Day1 extends App {
         case one::tail if (targetExpense - one > 0) => {
           getMatch(tail, targetExpense - one)
             .map({case (b,c) => (one, b,c)})
-            .fold(fn(expenses.tail))(Some(_))
+            .orElse(fn(expenses.tail))
         }
       }
     }
 
     fn(expenses)
       .map(r => (r._1 * r._2 * r._3) )
-      .get
   }
 
   def getMatch(expenses: List[Int], target: Int) : Option[(Int, Int)] = {

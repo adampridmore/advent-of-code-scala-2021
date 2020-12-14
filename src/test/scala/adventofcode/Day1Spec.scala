@@ -36,7 +36,7 @@ class Day1Spec extends AnyWordSpec with Matchers {
                               675
                               1456"""
 
-        Day1.solveText(expenseLines) shouldBe 514579
+        Day1.solveText(expenseLines) shouldBe Some(514579)
       }
     }
 
@@ -49,7 +49,7 @@ class Day1Spec extends AnyWordSpec with Matchers {
 
   "day 1 part II" should {
     "expenses example" should {
-      "be 514579" in {
+      "be 241861950" in {
         val expenseLines = """1721
     979
     366
@@ -57,7 +57,7 @@ class Day1Spec extends AnyWordSpec with Matchers {
     675
     1456"""
 
-        Day1.solveText2(expenseLines) shouldBe 241861950
+        Day1.solveText2(expenseLines) shouldBe Some(241861950)
       }
     }
 
@@ -78,12 +78,7 @@ class Day1Spec extends AnyWordSpec with Matchers {
           }
         }
 
-        maybeInt match {
-          case Some(i) => Some(i)
-          case None => tryParseRomanNumeral(s)
-        }
-
-        maybeInt.fold(tryParseRomanNumeral(s))(Some(_))
+        maybeInt.orElse(tryParseRomanNumeral(s))
       }
 
       tryParse("1") shouldBe Some(1)
