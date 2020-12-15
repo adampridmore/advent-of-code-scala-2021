@@ -8,24 +8,6 @@ import org.scalatest.matchers.should.Matchers
 import scala.io.Source
 
 class Day1Spec extends AnyWordSpec with Matchers {
-  "getMatch" should {
-    "No items" in {
-      Day1.getMatch(List.empty, 100) shouldBe None
-    }
-
-    "One item" in {
-      Day1.getMatch(List(1), 100) shouldBe None
-    }
-
-    "Two items that match" in {
-      Day1.getMatch(List(25, 75), 100) shouldBe Some(25, 75)
-    }
-
-    "Two items that dont match" in {
-      Day1.getMatch(List(25, 75),200) shouldBe None
-    }
-  }
-  
   "day 1 part I" should {
     "expenses example" should {
       "be 514579" in {
