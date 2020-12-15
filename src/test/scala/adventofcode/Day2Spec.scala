@@ -18,9 +18,21 @@ class Day2Spec extends AnyWordSpec with Matchers {
     Day2.solve(lines) shouldBe 2
   }
 
-  "day 2" in {
+  "day 2" should {
     val lines = Source.fromResource("day2/passwords.txt").getLines().toSeq
+    
+    "part 1" in {
+      val ans = Day2.solve(lines)
+      println("Day 2 part I : " + ans)
 
-    println("Day 2 part I : " + Day2.solve(lines))
+      ans shouldBe 467
+    }
+
+    "part 2" in {
+      val ans = Day2.solve2(lines)
+      println("Day 2 part II : " + ans)
+
+      ans shouldBe 441
+    }
   }
 }
