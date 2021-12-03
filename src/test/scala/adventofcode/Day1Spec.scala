@@ -57,21 +57,27 @@ class Day1Spec extends AnyWordSpec with Matchers {
       solveA(windows)
   }
 
+
+  def assertAndPrint[T](message: String, answer: T, expected: T) = {
+    println(s"${message.padTo(30, ' ')} - $answer")
+    answer shouldBe expected
+  }
+  
   "Day 1" should {
     "Part 1 Example" in {
-      println("Part 1 Example" + solveA(exampleInts))
+      assertAndPrint("Part 1 example", solveA(exampleInts), 7)
     }
 
     "Part 1" in {
-      println("Part 1: " + solveA(data))
+      assertAndPrint("Part 1", solveA(data), 1564)
     }
 
     "Part 2 Example" in {
-      println("Part 2 Example:  " + solveB(exampleInts))
+      assertAndPrint("Part 2 Example", solveB(exampleInts), 5)
     }
 
     "Part 2" in {
-      println("Part 2: " + solveB(data))
+      assertAndPrint("Part 2", solveB(data), 1611)
     }
   }
 }
