@@ -1,1 +1,1 @@
-# advent-of-code-scala-2020
+# advent-of-code-scala-2021
