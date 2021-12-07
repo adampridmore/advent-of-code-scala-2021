@@ -36,10 +36,13 @@ class Day2Spec extends AnyWordSpec with Matchers with AdventOfCodeHelper{
       })
   }
    
-  "part 1" should {
-    def solve(inputText: String) : Int = {
+  def solve[T](inputText: String)(zero: T)(next: (T, Command) => T) : T = {
+    getCommands(inputText)
+      .foldLeft(zero)(next)
+  }
 
-      val lines = getCommands(inputText)
+  "part 1" should {
+    def solvePart1(inputText: String) : Int = {
 
       def next(currentPosition: Position, command: Command) : Position = {
         (command.text) match {
@@ -48,8 +51,8 @@ class Day2Spec extends AnyWordSpec with Matchers with AdventOfCodeHelper{
           case "forward" => currentPosition.copy(horizontal = currentPosition.horizontal + command.ammount)
         }
       }
-      
-      val finalPosition = lines.foldLeft(Position.start)(next)
+    
+      val finalPosition = solve(inputText)(Position.start)(next)
     
       finalPosition.depth * finalPosition.horizontal
     }
@@ -62,13 +65,13 @@ class Day2Spec extends AnyWordSpec with Matchers with AdventOfCodeHelper{
       down 8
       forward 2"""
 
-      val answer = solve(inputText)
+      val answer = solvePart1(inputText)
       println(answer)
       answer shouldBe (10 * 15)
     }
 
     "Solution" in {
-      val answer = solve(data)
+      val answer = solvePart1(data)
       println(answer)
       answer shouldBe 2102357
     }
@@ -76,8 +79,6 @@ class Day2Spec extends AnyWordSpec with Matchers with AdventOfCodeHelper{
   
   "part 2" should {
     def solvePart2(inputText: String) : Int = {
-
-      val lines = getCommands(inputText)
 
       def next(currentPosition: PositionPart2, command: Command) : PositionPart2 = {
         (command.text) match {
@@ -91,7 +92,7 @@ class Day2Spec extends AnyWordSpec with Matchers with AdventOfCodeHelper{
         }
       }
       
-      val finalPosition = lines.foldLeft(PositionPart2.start)(next)
+      val finalPosition = solve(inputText)(PositionPart2.start)(next)
     
       finalPosition.depth * finalPosition.horizontal
     }
