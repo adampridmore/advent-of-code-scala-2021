@@ -7,7 +7,8 @@ import org.scalatest.wordspec.AnyWordSpec
 import org.scalatest.matchers.should.Matchers
 import scala.io.Source
 
-class Day1Spec extends AnyWordSpec with Matchers {
+class Day1Spec extends AnyWordSpec with Matchers with AdventOfCodeHelper {
+  val inputFilename = "day1/input.txt"
 
   private def textToInts(lines: String) : Seq[Int] = {
     lines
@@ -17,6 +18,8 @@ class Day1Spec extends AnyWordSpec with Matchers {
       .map(_.toInt)
       .toList
   }
+
+  val dataInts : Seq[Int] = textToInts(data)
 
   val exampleText : String = """
 199
@@ -31,13 +34,6 @@ class Day1Spec extends AnyWordSpec with Matchers {
 263
 """
   val exampleInts : Seq[Int] = textToInts(exampleText)
-
-  val filename = "day1/input.txt"
-  val data = Source
-      .fromResource(filename)
-      .getLines
-      .map(_.toInt)
-      .toSeq
 
   def solveA(ints : Seq[Int]) : Int = {
     ints
@@ -69,7 +65,7 @@ class Day1Spec extends AnyWordSpec with Matchers {
     }
 
     "Part 1" in {
-      assertAndPrint("Part 1", solveA(data), 1564)
+      assertAndPrint("Part 1", solveA(dataInts), 1564)
     }
 
     "Part 2 Example" in {
@@ -77,7 +73,7 @@ class Day1Spec extends AnyWordSpec with Matchers {
     }
 
     "Part 2" in {
-      assertAndPrint("Part 2", solveB(data), 1611)
+      assertAndPrint("Part 2", solveB(dataInts), 1611)
     }
   }
 }
