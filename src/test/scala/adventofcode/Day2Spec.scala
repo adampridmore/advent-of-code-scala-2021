@@ -66,13 +66,13 @@ class Day2Spec extends AnyWordSpec with Matchers with AdventOfCodeHelper{
       forward 2"""
 
       val answer = solvePart1(inputText)
-      println(answer)
+      // println(answer)
       answer shouldBe (10 * 15)
     }
 
     "Solution" in {
       val answer = solvePart1(data)
-      println(answer)
+      // println(answer)
       answer shouldBe 2102357
     }
   }
@@ -106,13 +106,13 @@ class Day2Spec extends AnyWordSpec with Matchers with AdventOfCodeHelper{
       forward 2"""
 
       val answer = solvePart2(inputText)
-      println(answer)
+      // println(answer)
       answer shouldBe (15 * 60)
     }
 
     "Solution" in {
       val answer = solvePart2(data)
-      println(answer)
+      // println(answer)
       answer shouldBe 2101031224
     }
   }

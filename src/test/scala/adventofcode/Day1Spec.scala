@@ -55,7 +55,7 @@ class Day1Spec extends AnyWordSpec with Matchers with AdventOfCodeHelper {
 
 
   def assertAndPrint[T](message: String, answer: T, expected: T) = {
-    println(s"${message.padTo(30, ' ')} - $answer")
+    // println(s"${message.padTo(30, ' ')} - $answer")
     answer shouldBe expected
   }
   
