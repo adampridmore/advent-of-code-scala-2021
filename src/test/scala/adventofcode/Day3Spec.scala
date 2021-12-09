@@ -52,13 +52,13 @@ class Day3Spec extends AnyWordSpec with Matchers with AdventOfCodeHelper{
     "Example" in {
       val lines = getLines(exampleInput).toArray
       val solution = solve(lines)
-      println(solve(lines))
+      // println(solve(lines))
       solution shouldBe 198
     }
 
     "Solution" in {
       val solution = solve(dataLines.toArray)
-      println("Solution : " + solution)
+      // println("Solution : " + solution)
       solution shouldBe 3813416
     }
   }
